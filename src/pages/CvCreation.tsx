@@ -172,10 +172,10 @@ const CvCreation: React.FC = () => {
 
   const renderPreview = () => {
     return (
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="card-glass p-6 rounded-lg">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-700">{formData.name}</h1>
-          <div className="flex justify-center gap-4 mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-primary">{formData.name}</h1>
+          <div className="flex justify-center gap-4 mt-2 text-muted-foreground">
             <span>{formData.email}</span>
             <span>•</span>
             <span>{formData.phone}</span>
@@ -183,49 +183,49 @@ const CvCreation: React.FC = () => {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-xl font-semibold border-b-2 border-blue-500 pb-1 mb-4 text-blue-700">PROFESSIONAL SUMMARY</h2>
-          <p className="text-gray-700 whitespace-pre-line">{formData.summary}</p>
+          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">PROFESSIONAL SUMMARY</h2>
+          <p className="text-foreground whitespace-pre-line">{formData.summary}</p>
         </div>
 
         <div className="mb-8">
-          <h2 className="text-xl font-semibold border-b-2 border-blue-500 pb-1 mb-4 text-blue-700">EDUCATION</h2>
+          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">EDUCATION</h2>
           {formData.education.map((edu, index) => (
             <div key={index} className="mb-6">
               <div className="flex justify-between">
                 <h3 className="font-bold text-lg">{edu.institution}</h3>
-                <span className="text-gray-600">{edu.year}</span>
+                <span className="text-muted-foreground">{edu.year}</span>
               </div>
-              <p className="text-gray-700 italic">{edu.degree}</p>
+              <p className="text-foreground italic">{edu.degree}</p>
               {edu.description && (
-                <p className="text-gray-600 mt-2 whitespace-pre-line">{edu.description}</p>
+                <p className="text-muted-foreground mt-2 whitespace-pre-line">{edu.description}</p>
               )}
             </div>
           ))}
         </div>
 
         <div className="mb-8">
-          <h2 className="text-xl font-semibold border-b-2 border-blue-500 pb-1 mb-4 text-blue-700">WORK EXPERIENCE</h2>
+          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">WORK EXPERIENCE</h2>
           {formData.experience.map((exp, index) => (
             <div key={index} className="mb-6">
               <div className="flex justify-between">
                 <h3 className="font-bold text-lg">{exp.company}</h3>
-                <span className="text-gray-600">
+                <span className="text-muted-foreground">
                   {exp.startDate} - {exp.endDate || 'Present'}
                 </span>
               </div>
-              <p className="text-gray-700 italic">{exp.position}</p>
+              <p className="text-foreground italic">{exp.position}</p>
               {exp.description && (
-                <p className="text-gray-600 mt-2 whitespace-pre-line">{exp.description}</p>
+                <p className="text-muted-foreground mt-2 whitespace-pre-line">{exp.description}</p>
               )}
             </div>
           ))}
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold border-b-2 border-blue-500 pb-1 mb-4 text-blue-700">SKILLS</h2>
+          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">SKILLS</h2>
           <div className="flex flex-wrap gap-2">
             {formData.skills.filter(skill => skill.trim()).map((skill, index) => (
-              <span key={index} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+              <span key={index} className="bg-accent text-accent-foreground px-3 py-1 rounded-full text-sm">
                 {skill}
               </span>
             ))}
@@ -236,11 +236,11 @@ const CvCreation: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-background text-foreground py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <motion.div
-            className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4"
+            className="inline-flex items-center px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1, duration: 0.3 }}
@@ -249,7 +249,7 @@ const CvCreation: React.FC = () => {
             Professional CV Builder
           </motion.div>
           <motion.h1
-            className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+            className="text-3xl md:text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.3 }}
@@ -257,7 +257,7 @@ const CvCreation: React.FC = () => {
             Create Your Modern CV
           </motion.h1>
           <motion.p
-            className="text-lg text-gray-600 max-w-2xl mx-auto"
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.3 }}
@@ -266,16 +266,16 @@ const CvCreation: React.FC = () => {
           </motion.p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-          <div className="flex border-b">
+        <div className="bg-card rounded-xl shadow-lg overflow-hidden border border-border">
+          <div className="flex border-b border-border">
             <button
-              className={`flex-1 py-4 px-6 font-medium text-center ${activeTab === 'form' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+              className={`flex-1 py-4 px-6 font-medium text-center ${activeTab === 'form' ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'}`}
               onClick={() => setActiveTab('form')}
             >
               CV Form
             </button>
             <button
-              className={`flex-1 py-4 px-6 font-medium text-center ${activeTab === 'preview' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-500 hover:text-gray-700'}`}
+              className={`flex-1 py-4 px-6 font-medium text-center ${activeTab === 'preview' ? 'text-primary border-b-2 border-primary' : 'text-muted-foreground hover:text-foreground'}`}
               onClick={() => setActiveTab('preview')}
               disabled={!cvGenerated}
             >
@@ -289,64 +289,64 @@ const CvCreation: React.FC = () => {
                 {/* Personal Information */}
                 <div className="mb-12">
                   <h3 className="text-xl font-semibold mb-6 flex items-center">
-                    <div className="bg-blue-100 p-2 rounded-full mr-3">
-                      <FileText className="h-5 w-5 text-blue-600" />
+                    <div className="bg-primary/10 p-2 rounded-full mr-3">
+                      <FileText className="h-5 w-5 text-primary" />
                     </div>
                     Personal Information
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                      <label htmlFor="name" className="block text-sm font-medium mb-1">Full Name</label>
                       <input
                         type="text"
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                        className={`form-input ${errors.name ? 'border-destructive' : ''}`}
                         placeholder="John Doe"
                       />
-                      {errors.name && <p className="mt-1 text-sm text-red-600">{errors.name}</p>}
+                      {errors.name && <p className="mt-1 text-sm text-destructive">{errors.name}</p>}
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                      <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
                       <input
                         type="email"
                         id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                        className={`form-input ${errors.email ? 'border-destructive' : ''}`}
                         placeholder="john.doe@example.com"
                       />
-                      {errors.email && <p className="mt-1 text-sm text-red-600">{errors.email}</p>}
+                      {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email}</p>}
                     </div>
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                      <label htmlFor="phone" className="block text-sm font-medium mb-1">Phone Number</label>
                       <input
                         type="text"
                         id="phone"
                         name="phone"
                         value={formData.phone}
                         onChange={handleChange}
-                        className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
+                        className={`form-input ${errors.phone ? 'border-destructive' : ''}`}
                         placeholder="+1 123 456 7890"
                       />
-                      {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
+                      {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
                     </div>
                   </div>
                   <div>
-                    <label htmlFor="summary" className="block text-sm font-medium text-gray-700 mb-1">Professional Summary</label>
+                    <label htmlFor="summary" className="block text-sm font-medium mb-1">Professional Summary</label>
                     <textarea
                       id="summary"
                       name="summary"
                       value={formData.summary}
                       onChange={handleChange}
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors.summary ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`form-textarea ${errors.summary ? 'border-destructive' : ''}`}
                       placeholder="Briefly describe your professional background, skills, and goals..."
                       rows={4}
                     />
-                    {errors.summary && <p className="mt-1 text-sm text-red-600">{errors.summary}</p>}
+                    {errors.summary && <p className="mt-1 text-sm text-destructive">{errors.summary}</p>}
                   </div>
                 </div>
 
@@ -357,20 +357,20 @@ const CvCreation: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => addArrayItem('education')}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-800"
+                      className="inline-flex items-center text-primary hover:text-primary/80"
                     >
                       <Plus className="h-4 w-4 mr-1" />
                       Add Education
                     </button>
                   </div>
                   {formData.education.map((edu, index) => (
-                    <div key={index} className="p-5 border border-gray-200 rounded-lg mb-6 bg-gray-50">
+                    <div key={index} className="card-glass p-5 rounded-lg mb-6">
                       <div className="flex justify-between items-center mb-4">
                         <h4 className="font-medium">Education #{index + 1}</h4>
                         <button
                           type="button"
                           onClick={() => removeArrayItem('education', index)}
-                          className="text-red-500 hover:text-red-700 p-1"
+                          className="text-destructive hover:text-destructive/80 p-1"
                           disabled={formData.education.length <= 1}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -378,54 +378,54 @@ const CvCreation: React.FC = () => {
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label htmlFor={`edu-institution-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Institution</label>
+                          <label htmlFor={`edu-institution-${index}`} className="block text-sm font-medium mb-1">Institution</label>
                           <input
                             type="text"
                             id={`edu-institution-${index}`}
                             value={edu.institution}
                             onChange={(e) => handleArrayChange('education', index, 'institution', e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors[`education[${index}].institution`] ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`form-input ${errors[`education[${index}].institution`] ? 'border-destructive' : ''}`}
                             placeholder="University Name"
                           />
                           {errors[`education[${index}].institution`] && (
-                            <p className="mt-1 text-sm text-red-600">{errors[`education[${index}].institution`]}</p>
+                            <p className="mt-1 text-sm text-destructive">{errors[`education[${index}].institution`]}</p>
                           )}
                         </div>
                         <div>
-                          <label htmlFor={`edu-degree-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Degree</label>
+                          <label htmlFor={`edu-degree-${index}`} className="block text-sm font-medium mb-1">Degree</label>
                           <input
                             type="text"
                             id={`edu-degree-${index}`}
                             value={edu.degree}
                             onChange={(e) => handleArrayChange('education', index, 'degree', e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors[`education[${index}].degree`] ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`form-input ${errors[`education[${index}].degree`] ? 'border-destructive' : ''}`}
                             placeholder="Bachelor of Science"
                           />
                           {errors[`education[${index}].degree`] && (
-                            <p className="mt-1 text-sm text-red-600">{errors[`education[${index}].degree`]}</p>
+                            <p className="mt-1 text-sm text-destructive">{errors[`education[${index}].degree`]}</p>
                           )}
                         </div>
                         <div>
-                          <label htmlFor={`edu-year-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Year</label>
+                          <label htmlFor={`edu-year-${index}`} className="block text-sm font-medium mb-1">Year</label>
                           <input
                             type="text"
                             id={`edu-year-${index}`}
                             value={edu.year}
                             onChange={(e) => handleArrayChange('education', index, 'year', e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors[`education[${index}].year`] ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`form-input ${errors[`education[${index}].year`] ? 'border-destructive' : ''}`}
                             placeholder="2018 - 2022"
                           />
                           {errors[`education[${index}].year`] && (
-                            <p className="mt-1 text-sm text-red-600">{errors[`education[${index}].year`]}</p>
+                            <p className="mt-1 text-sm text-destructive">{errors[`education[${index}].year`]}</p>
                           )}
                         </div>
                         <div className="md:col-span-2">
-                          <label htmlFor={`edu-description-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Description (Optional)</label>
+                          <label htmlFor={`edu-description-${index}`} className="block text-sm font-medium mb-1">Description (Optional)</label>
                           <textarea
                             id={`edu-description-${index}`}
                             value={edu.description}
                             onChange={(e) => handleArrayChange('education', index, 'description', e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            className="form-textarea"
                             placeholder="Relevant coursework, achievements, etc."
                             rows={3}
                           />
@@ -442,20 +442,20 @@ const CvCreation: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => addArrayItem('experience')}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-800"
+                      className="inline-flex items-center text-primary hover:text-primary/80"
                     >
                       <Plus className="h-4 w-4 mr-1" />
                       Add Experience
                     </button>
                   </div>
                   {formData.experience.map((exp, index) => (
-                    <div key={index} className="p-5 border border-gray-200 rounded-lg mb-6 bg-gray-50">
+                    <div key={index} className="card-glass p-5 rounded-lg mb-6">
                       <div className="flex justify-between items-center mb-4">
                         <h4 className="font-medium">Experience #{index + 1}</h4>
                         <button
                           type="button"
                           onClick={() => removeArrayItem('experience', index)}
-                          className="text-red-500 hover:text-red-700 p-1"
+                          className="text-destructive hover:text-destructive/80 p-1"
                           disabled={formData.experience.length <= 1}
                         >
                           <Trash2 className="h-4 w-4" />
@@ -463,65 +463,65 @@ const CvCreation: React.FC = () => {
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label htmlFor={`exp-company-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Company</label>
+                          <label htmlFor={`exp-company-${index}`} className="block text-sm font-medium mb-1">Company</label>
                           <input
                             type="text"
                             id={`exp-company-${index}`}
                             value={exp.company}
                             onChange={(e) => handleArrayChange('experience', index, 'company', e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors[`experience[${index}].company`] ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`form-input ${errors[`experience[${index}].company`] ? 'border-destructive' : ''}`}
                             placeholder="Company Name"
                           />
                           {errors[`experience[${index}].company`] && (
-                            <p className="mt-1 text-sm text-red-600">{errors[`experience[${index}].company`]}</p>
+                            <p className="mt-1 text-sm text-destructive">{errors[`experience[${index}].company`]}</p>
                           )}
                         </div>
                         <div>
-                          <label htmlFor={`exp-position-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Position</label>
+                          <label htmlFor={`exp-position-${index}`} className="block text-sm font-medium mb-1">Position</label>
                           <input
                             type="text"
                             id={`exp-position-${index}`}
                             value={exp.position}
                             onChange={(e) => handleArrayChange('experience', index, 'position', e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors[`experience[${index}].position`] ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`form-input ${errors[`experience[${index}].position`] ? 'border-destructive' : ''}`}
                             placeholder="Software Engineer"
                           />
                           {errors[`experience[${index}].position`] && (
-                            <p className="mt-1 text-sm text-red-600">{errors[`experience[${index}].position`]}</p>
+                            <p className="mt-1 text-sm text-destructive">{errors[`experience[${index}].position`]}</p>
                           )}
                         </div>
                         <div>
-                          <label htmlFor={`exp-startDate-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                          <label htmlFor={`exp-startDate-${index}`} className="block text-sm font-medium mb-1">Start Date</label>
                           <input
                             type="text"
                             id={`exp-startDate-${index}`}
                             value={exp.startDate}
                             onChange={(e) => handleArrayChange('experience', index, 'startDate', e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors[`experience[${index}].startDate`] ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`form-input ${errors[`experience[${index}].startDate`] ? 'border-destructive' : ''}`}
                             placeholder="Jan 2020"
                           />
                           {errors[`experience[${index}].startDate`] && (
-                            <p className="mt-1 text-sm text-red-600">{errors[`experience[${index}].startDate`]}</p>
+                            <p className="mt-1 text-sm text-destructive">{errors[`experience[${index}].startDate`]}</p>
                           )}
                         </div>
                         <div>
-                          <label htmlFor={`exp-endDate-${index}`} className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                          <label htmlFor={`exp-endDate-${index}`} className="block text-sm font-medium mb-1">End Date</label>
                           <input
                             type="text"
                             id={`exp-endDate-${index}`}
                             value={exp.endDate}
                             onChange={(e) => handleArrayChange('experience', index, 'endDate', e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            className="form-input"
                             placeholder="Present (or end date)"
                           />
                         </div>
                         <div className="md:col-span-2">
-                          <label htmlFor={`exp-description-${index}`} className="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                          <label htmlFor={`exp-description-${index}`} className="block text-sm font-medium mb-1">Description</label>
                           <textarea
                             id={`exp-description-${index}`}
                             value={exp.description}
                             onChange={(e) => handleArrayChange('experience', index, 'description', e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            className="form-textarea"
                             placeholder="Describe your responsibilities and achievements..."
                             rows={3}
                           />
@@ -538,7 +538,7 @@ const CvCreation: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => addArrayItem('skills')}
-                      className="inline-flex items-center text-blue-600 hover:text-blue-800"
+                      className="inline-flex items-center text-primary hover:text-primary/80"
                     >
                       <Plus className="h-4 w-4 mr-1" />
                       Add Skill
@@ -552,21 +552,21 @@ const CvCreation: React.FC = () => {
                             type="text"
                             value={skill}
                             onChange={(e) => handleArrayChange('skills', index, '', e.target.value)}
-                            className={`w-full px-4 py-2 border rounded-lg focus:ring-blue-500 focus:border-blue-500 ${errors.skills && index === formData.skills.length - 1 ? 'border-red-500' : 'border-gray-300'}`}
+                            className={`form-input ${errors.skills && index === formData.skills.length - 1 ? 'border-destructive' : ''}`}
                             placeholder="e.g. JavaScript, Project Management, etc."
                           />
                         </div>
                         <button
                           type="button"
                           onClick={() => removeArrayItem('skills', index)}
-                          className="text-red-500 hover:text-red-700 p-1"
+                          className="text-destructive hover:text-destructive/80 p-1"
                           disabled={formData.skills.length <= 1}
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
                     ))}
-                    {errors.skills && <p className="mt-1 text-sm text-red-600">{errors.skills}</p>}
+                    {errors.skills && <p className="mt-1 text-sm text-destructive">{errors.skills}</p>}
                   </div>
                 </div>
 
@@ -574,7 +574,7 @@ const CvCreation: React.FC = () => {
                 <div className="mt-8">
                   <button
                     type="submit"
-                    className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center"
+                    className="button-glass w-full py-3 px-6 flex items-center justify-center"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -590,26 +590,26 @@ const CvCreation: React.FC = () => {
               </form>
             ) : (
               <div className="space-y-6">
-                <div className="border rounded-lg overflow-hidden">
+                <div className="border border-border rounded-lg overflow-hidden">
                   {renderPreview()}
                 </div>
                 <div className="flex gap-4">
                   <button
                     onClick={() => setActiveTab('form')}
-                    className="py-2 px-4 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="py-2 px-4 border border-border rounded-lg hover:bg-muted transition-colors"
                   >
                     Back to Form
                   </button>
                   <button
                     onClick={handleDownload}
-                    className="flex-1 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center justify-center"
+                    className="button-glass flex-1 py-2 px-4 flex items-center justify-center"
                   >
                     <Download className="h-4 w-4 mr-2" />
                     Download CV (PDF)
                   </button>
                 </div>
                 {cvGenerated && (
-                  <div className="flex items-center text-green-600">
+                  <div className="flex items-center text-green-500">
                     <CheckCircle className="h-4 w-4 mr-2" />
                     <span>CV generated successfully!</span>
                   </div>

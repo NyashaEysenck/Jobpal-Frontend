@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Briefcase } from 'lucide-react';
@@ -22,7 +21,6 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false);
   }, [location.pathname]);
@@ -39,7 +37,7 @@ const Navbar: React.FC = () => {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
         scrolled || isOpen
-          ? 'bg-white/80 dark:bg-foreground/10 backdrop-blur-md border-b border-border shadow-sm'
+          ? 'bg-background/90 backdrop-blur-md border-b border-border shadow-sm'
           : 'bg-transparent'
       )}
     >
@@ -64,7 +62,7 @@ const Navbar: React.FC = () => {
                 'text-sm font-medium transition-colors hover:text-primary relative py-1',
                 location.pathname === link.path
                   ? 'text-primary after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-primary after:content-[""]'
-                  : 'text-foreground/80'
+                  : 'text-foreground/80 hover:text-primary/90'
               )}
             >
               {link.name}
@@ -75,7 +73,7 @@ const Navbar: React.FC = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden focus:outline-none"
+          className="md:hidden focus:outline-none text-foreground/80 hover:text-primary"
           aria-label="Toggle menu"
         >
           {isOpen ? (
@@ -88,7 +86,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Navigation */}
       {isOpen && (
-        <div className="md:hidden bg-background/95 backdrop-blur-md border-t border-border">
+        <div className="md:hidden bg-background/95 backdrop-blur-lg border-t border-border">
           <div className="container py-4 px-4 space-y-4">
             {navLinks.map((link) => (
               <Link
@@ -98,7 +96,7 @@ const Navbar: React.FC = () => {
                   'block py-2 text-sm font-medium transition-colors',
                   location.pathname === link.path
                     ? 'text-primary'
-                    : 'text-foreground/80 hover:text-primary'
+                    : 'text-foreground/80 hover:text-primary/90'
                 )}
               >
                 {link.name}

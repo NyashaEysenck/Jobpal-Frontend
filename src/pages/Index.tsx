@@ -41,7 +41,8 @@ const Index: React.FC = () => {
     setIsLoading(true);
   
     try {
-      const response = await fetch('http://127.0.0.1:5000/get_recommendations', {
+      const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/get_recommendations`
+      , {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ program: formData.program }),

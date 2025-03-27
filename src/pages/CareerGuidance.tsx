@@ -30,7 +30,7 @@ const CareerGuidance: React.FC = () => {
     setIsLoading(true);
 
     // Send POST request to get career guidance for the selected field
-    fetch('http://localhost:5000/career_guidance', {
+    fetch(`${import.meta.env.VITE_APP_BASE_URL}/career_guidance`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
