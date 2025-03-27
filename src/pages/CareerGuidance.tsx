@@ -34,7 +34,6 @@ const CareerGuidance: React.FC = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', // Make sure server allows this origin
       },
       body: JSON.stringify({ program: searchQuery }), // Send field as JSON
     })
