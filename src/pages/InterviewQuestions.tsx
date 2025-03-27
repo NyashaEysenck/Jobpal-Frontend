@@ -23,7 +23,7 @@ const InterviewQuestions: React.FC = () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/interview-questions`, {
         method: 'POST',
-        mode: 'cors',  // Explicitly enable CORS
+        mode: 'no-cors',  // Explicitly enable CORS
         headers: {
           'Content-Type': 'application/json',
         },
