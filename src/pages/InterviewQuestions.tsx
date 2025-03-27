@@ -23,6 +23,7 @@ const InterviewQuestions: React.FC = () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/interview-questions`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
