@@ -4,83 +4,83 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 70 17.6% 6.7%; /* Dark Olive */
+    --background: 0 0% 10%; /* Near Black */
+    --foreground: 0 0% 98%; /* Off-White */
 
-    --card: 0 0% 96.1%; /* Off-White */
-    --card-foreground: 70 17.6% 6.7%; /* Dark Olive */
+    --card: 0 0% 13%; /* Dark Gray */
+    --card-foreground: 0 0% 98%; /* Off-White */
 
-    --popover: 0 0% 100%; /* White */
-    --popover-foreground: 70 17.6% 6.7%; /* Dark Olive */
+    --popover: 0 0% 10%; /* Near Black */
+    --popover-foreground: 0 0% 98%; /* Off-White */
 
-    --primary: 5 76.2% 39.6%; /* Deep Red */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 0 100% 50%; /* Vibrant Red */
+    --primary-foreground: 0 0% 98%; /* Off-White */
 
-    --secondary: 0 0% 94.9%; /* Light Gray */
-    --secondary-foreground: 70 17.6% 6.7%; /* Dark Olive */
+    --secondary: 0 0% 15%; /* Slightly lighter Dark Gray */
+    --secondary-foreground: 0 0% 98%; /* Off-White */
 
-    --muted: 0 0% 94.5%; /* Soft Gray */
-    --muted-foreground: 70 17.6% 6.7%; /* Dark Olive */
+    --muted: 0 0% 15%; /* Slightly lighter Dark Gray */
+    --muted-foreground: 0 0% 80%; /* Light Gray */
 
-    --accent: 0 0% 94.9%; /* Light Gray */
-    --accent-foreground: 70 17.6% 6.7%; /* Dark Olive */
+    --accent: 0 70% 45%; /* Darker Red */
+    --accent-foreground: 0 0% 98%; /* Off-White */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%; /* White */
+    --destructive: 0 62.8% 30.6%; /* Dark Red */
+    --destructive-foreground: 0 0% 98%; /* Off-White */
 
-    --border: 0 0% 94.5%; /* Soft Gray */
-    --input: 0 0% 94.5%; /* Soft Gray */
-    --ring: 70 17.6% 6.7%; /* Dark Olive */
+    --border: 0 0% 20%; /* Dark Gray Border */
+    --input: 0 0% 20%; /* Dark Gray Input */
+    --ring: 0 100% 50%; /* Vibrant Red */
 
-    --radius: 0.75rem;
+    --radius: 0.5rem; /* Border Radius */
 
-    --sidebar-background: 0 0% 96.1%; /* Off-White */
-    --sidebar-foreground: 70 17.6% 6.7%; /* Dark Olive */
-    --sidebar-primary: 5 76.2% 39.6%; /* Deep Red */
-    --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 0 0% 94.9%; /* Light Gray */
-    --sidebar-accent-foreground: 70 17.6% 6.7%; /* Dark Olive */
-    --sidebar-border: 0 0% 94.5%; /* Soft Gray */
-    --sidebar-ring: 5 76.2% 39.6%; /* Deep Red */
+    --sidebar-background: 0 0% 12%; /* Dark Gray Sidebar */
+    --sidebar-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-primary: 0 100% 50%; /* Vibrant Red */
+    --sidebar-primary-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-accent: 0 70% 45%; /* Darker Red */
+    --sidebar-accent-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-border: 0 0% 20%; /* Dark Gray Border */
+    --sidebar-ring: 0 100% 50%; /* Vibrant Red */
   }
 
   .dark {
-    --background: 70 17.6% 6.7%; /* Dark Olive */
-    --foreground: 0 0% 96.1%; /* Off-White */
+    --background: 0 0% 7%; /* Deeper Black */
+    --foreground: 0 0% 98%; /* Off-White */
 
-    --card: 70 17.6% 6.7%; /* Dark Olive */
-    --card-foreground: 0 0% 96.1%; /* Off-White */
+    --card: 0 0% 10%; /* Near Black */
+    --card-foreground: 0 0% 98%; /* Off-White */
 
-    --popover: 70 17.6% 6.7%; /* Dark Olive */
-    --popover-foreground: 0 0% 96.1%; /* Off-White */
+    --popover: 0 0% 7%; /* Deeper Black */
+    --popover-foreground: 0 0% 98%; /* Off-White */
 
-    --primary: 5 76.2% 39.6%; /* Deep Red */
-    --primary-foreground: 0 0% 100%; /* White */
+    --primary: 0 100% 50%; /* Vibrant Red */
+    --primary-foreground: 0 0% 98%; /* Off-White */
 
-    --secondary: 70 17.6% 10%; /* Slightly lighter Dark Olive */
-    --secondary-foreground: 0 0% 96.1%; /* Off-White */
+    --secondary: 0 0% 12%; /* Very Dark Gray */
+    --secondary-foreground: 0 0% 98%; /* Off-White */
 
-    --muted: 70 17.6% 10%; /* Slightly lighter Dark Olive */
-    --muted-foreground: 0 0% 80%; /* Lightened Off-White */
+    --muted: 0 0% 12%; /* Very Dark Gray */
+    --muted-foreground: 0 0% 80%; /* Light Gray */
 
-    --accent: 70 17.6% 10%; /* Slightly lighter Dark Olive */
-    --accent-foreground: 0 0% 96.1%; /* Off-White */
+    --accent: 0 70% 45%; /* Darker Red */
+    --accent-foreground: 0 0% 98%; /* Off-White */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 96.1%; /* Off-White */
+    --destructive: 0 62.8% 30.6%; /* Dark Red */
+    --destructive-foreground: 0 0% 98%; /* Off-White */
 
-    --border: 70 17.6% 15%; /* Lighter Dark Olive */
-    --input: 70 17.6% 15%; /* Lighter Dark Olive */
-    --ring: 0 0% 94.5%; /* Soft Gray */
+    --border: 0 0% 15%; /* Very Dark Gray Border */
+    --input: 0 0% 15%; /* Very Dark Gray Input */
+    --ring: 0 100% 50%; /* Vibrant Red */
     
-    --sidebar-background: 70 17.6% 8%; /* Slightly lighter Dark Olive */
-    --sidebar-foreground: 0 0% 94.9%; /* Light Gray */
-    --sidebar-primary: 5 76.2% 39.6%; /* Deep Red */
-    --sidebar-primary-foreground: 0 0% 100%; /* White */
-    --sidebar-accent: 70 17.6% 12%; /* Lighter Dark Olive */
-    --sidebar-accent-foreground: 0 0% 94.9%; /* Light Gray */
-    --sidebar-border: 70 17.6% 15%; /* Lighter Dark Olive */
-    --sidebar-ring: 5 76.2% 39.6%; /* Deep Red */
+    --sidebar-background: 0 0% 9%; /* Deeper Dark Gray */
+    --sidebar-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-primary: 0 100% 50%; /* Vibrant Red */
+    --sidebar-primary-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-accent: 0 70% 45%; /* Darker Red */
+    --sidebar-accent-foreground: 0 0% 98%; /* Off-White */
+    --sidebar-border: 0 0% 15%; /* Very Dark Gray Border */
+    --sidebar-ring: 0 100% 50%; /* Vibrant Red */
   }
 }
 
@@ -92,10 +92,12 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-sans font-medium tracking-tight;
+    @apply font-bold tracking-tight;
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
   }
   
   h1 {
@@ -113,32 +115,32 @@
 
 @layer components {
   .card-glass {
-    @apply bg-white/80 dark:bg-foreground/10 backdrop-blur-md border border-border rounded-lg shadow-glass;
+    @apply bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg shadow-md;
   }
   
   .input-glass {
-    @apply bg-background/50 backdrop-blur-sm border border-border rounded-md shadow-sm;
+    @apply bg-background/70 backdrop-blur-sm border border-border rounded-md shadow-sm;
   }
   
   .button-glass {
-    @apply bg-primary/90 backdrop-blur-sm text-primary-foreground rounded-md shadow-sm 
-    hover:bg-primary/80 transition-all duration-300;
+    @apply bg-primary/90 hover:bg-primary text-primary-foreground rounded-md shadow-sm 
+    transition-all duration-200 font-medium;
   }
 
   .page-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-fade-in;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in;
   }
 
   .page-section {
-    @apply my-12 animate-slide-up;
+    @apply my-8 animate-slide-up;
   }
 
   .form-container {
-    @apply card-glass p-6 md:p-8 my-8;
+    @apply card-glass p-6 md:p-8 my-6;
   }
 
   .form-group {
-    @apply mb-6;
+    @apply mb-4;
   }
 
   .form-label {
@@ -146,7 +148,7 @@
   }
 
   .form-input {
-    @apply input-glass w-full p-3 focus:ring-2 focus:ring-primary/30 focus:outline-none transition-all duration-300;
+    @apply input-glass w-full p-2.5 focus:ring-2 focus:ring-primary/50 focus:outline-none transition-all duration-200;
   }
 
   .form-textarea {
@@ -154,10 +156,11 @@
   }
 
   .form-submit {
-    @apply button-glass py-3 px-6 w-full md:w-auto text-center;
+    @apply button-glass py-2.5 px-6 w-full md:w-auto text-center;
   }
 
   .result-container {
-    @apply card-glass p-6 md:p-8 my-8 animate-fade-in;
+    @apply card-glass p-6 md:p-8 my-6 animate-fade-in;
   }
 }
+
