@@ -85,6 +85,13 @@
 }
 
 @layer base {
+  body {
+    @apply bg-[url('/images/background.jpg')] bg-cover bg-center bg-no-repeat;
+  }
+}
+
+
+@layer base {
   * {
     @apply border-border;
   }
