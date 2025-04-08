@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PageTransition from '@/components/PageTransition';
 import { motion } from 'framer-motion';
-import { MessagesSquare, Search, ChevronDown, ChevronUp, Loader2 } from 'lucide-react';
+import { MessagesSquare, Search, ChevronDown, ChevronUp, Loader2, RefreshCw, AlertCircle } from 'lucide-react';
 
 const InterviewQuestions: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -10,6 +10,7 @@ const InterviewQuestions: React.FC = () => {
   const [questions, setQuestions] = useState<{ question: string; tips: string[] }[]>([]);
   const [expandedIndices, setExpandedIndices] = useState<number[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   const handleSearch = async () => {
     if (!searchQuery.trim()) {
@@ -19,9 +20,13 @@ const InterviewQuestions: React.FC = () => {
 
     setIsLoading(true);
     setError(null);
+    // Clear previous results immediately when starting a new search
+    setQuestions([]);
+    setSelectedRole('');
+    setExpandedIndices([]);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/interview-questions`, {
+      const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL || ''}/interview-questions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -29,17 +34,33 @@ const InterviewQuestions: React.FC = () => {
         body: JSON.stringify({ role: searchQuery }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to fetch questions.');
+        throw new Error(data.error || 'Failed to fetch questions.');
       }
 
-      const data = await response.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      if (!data.questions || !Array.isArray(data.questions) || data.questions.length === 0) {
+        throw new Error('No questions were found for this role.');
+      }
+
       setSelectedRole(searchQuery);
       setQuestions(data.questions);
-      setExpandedIndices([0, 1, 2]); // Expand first three questions by default
+      
+      // Expand first three questions or all if fewer than 3
+      const initialExpandCount = Math.min(3, data.questions.length);
+      setExpandedIndices(Array.from({ length: initialExpandCount }, (_, i) => i));
+      
+      // Reset retry count on success
+      setRetryCount(0);
     } catch (err) {
-      setError('An error occurred while fetching questions.');
-      console.error(err);
+      console.error('Error fetching interview questions:', err);
+      setError(err instanceof Error ? err.message : 'An error occurred while fetching questions.');
+      setQuestions([]);
     } finally {
       setIsLoading(false);
     }
@@ -51,6 +72,17 @@ const InterviewQuestions: React.FC = () => {
         ? prev.filter(i => i !== index)
         : [...prev, index]
     );
+  };
+
+  const handleRetry = () => {
+    setRetryCount(prev => prev + 1);
+    handleSearch();
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -99,6 +131,7 @@ const InterviewQuestions: React.FC = () => {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyPress={handleKeyPress}
                   placeholder="Enter a role (e.g., Software Engineer)..."
                   className="form-input pl-10"
                 />
@@ -120,14 +153,27 @@ const InterviewQuestions: React.FC = () => {
 
               {/* Error Message */}
               {error && (
-                <div className="text-red-500 text-sm mt-2">
-                  {error}
+                <div className="mt-4 p-3 bg-destructive/10 border border-destructive/20 rounded-lg text-destructive-foreground">
+                  <div className="flex items-start gap-2">
+                    <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-medium">{error}</p>
+                      {retryCount < 3 && (
+                        <button 
+                          onClick={handleRetry} 
+                          className="mt-2 flex items-center gap-1 text-sm text-primary hover:text-primary/80"
+                        >
+                          <RefreshCw className="h-3 w-3" /> Try again
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
 
             {/* Questions Display */}
-            {selectedRole && (
+            {selectedRole && questions.length > 0 && (
               <div className="form-container">
                 <h3 className="text-xl font-medium mb-6">
                   Interview Questions for {selectedRole}
@@ -169,11 +215,15 @@ const InterviewQuestions: React.FC = () => {
                             <p className="text-foreground/80 mb-3">
                               When answering this question, consider:
                             </p>
-                            <ul className="list-disc pl-5 space-y-2 text-foreground/70">
-                              {question.tips.map((tip, tipIndex) => (
-                                <li key={tipIndex}>{tip}</li>
-                              ))}
-                            </ul>
+                            {question.tips && question.tips.length > 0 ? (
+                              <ul className="list-disc pl-5 space-y-2 text-foreground/70">
+                                {question.tips.map((tip, tipIndex) => (
+                                  <li key={tipIndex}>{tip}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <p className="text-foreground/60 italic">No specific tips available for this question.</p>
+                            )}
                           </div>
                         )}
                       </motion.div>
