@@ -227,11 +227,6 @@ const CvCreation: React.FC = () => {
         </div>
 
         <div className="mb-8">
-          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">PROFESSIONAL SUMMARY</h2>
-          <p className="text-foreground whitespace-pre-line">{formData.summary}</p>
-        </div>
-
-        <div className="mb-8">
           <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">EDUCATION</h2>
           {formData.education.map((edu, index) => (
             <div key={index} className="mb-6">
@@ -265,7 +260,7 @@ const CvCreation: React.FC = () => {
           ))}
         </div>
 
-        <div>
+        <div className="mb-8">
           <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">SKILLS</h2>
           <div className="flex flex-wrap gap-2">
             {formData.skills.filter(skill => skill.trim()).map((skill, index) => (
@@ -274,6 +269,11 @@ const CvCreation: React.FC = () => {
               </span>
             ))}
           </div>
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">PROFESSIONAL SUMMARY</h2>
+          <p className="text-foreground whitespace-pre-line">{formData.summary}</p>
         </div>
       </div>
     );
@@ -379,39 +379,6 @@ const CvCreation: React.FC = () => {
                       {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
                     </div>
                   </div>
-                  <div>
-                    <label htmlFor="summary" className="block text-sm font-medium mb-1">Professional Summary</label>
-                    <div className="relative">
-                      <textarea
-                        id="summary"
-                        name="summary"
-                        value={formData.summary}
-                        onChange={handleChange}
-                        className={`form-textarea ${errors.summary ? 'border-destructive' : ''}`}
-                        placeholder="Briefly describe your professional background, skills, and goals..."
-                        rows={4}
-                      />
-                      <button
-                        type="button"
-                        onClick={handleGenerateSummary}
-                        disabled={isSummaryLoading}
-                        className="absolute top-2 right-2 bg-primary/10 hover:bg-primary/20 text-primary p-1.5 rounded-md transition-colors"
-                        title="Generate summary with AI"
-                      >
-                        {isSummaryLoading ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
-                        ) : (
-                          <Sparkles className="h-4 w-4" />
-                        )}
-                      </button>
-                    </div>
-                    {errors.summary && <p className="mt-1 text-sm text-destructive">{errors.summary}</p>}
-                    <p className="mt-1 text-xs text-foreground/60">
-                      {isSummaryLoading ? 
-                        'Generating your professional summary...' : 
-                        'Click the sparkle icon to generate a summary based on your information'}
-                    </p>
-                  </div>
                 </div>
 
                 {/* Education */}
@@ -460,6 +427,7 @@ const CvCreation: React.FC = () => {
                           <input
                             type="text"
                             id={`edu-degree-${index}`}
+                            name="degree"
                             value={edu.degree}
                             onChange={(e) => handleArrayChange('education', index, 'degree', e.target.value)}
                             className={`form-input ${errors[`education[${index}].degree`] ? 'border-destructive' : ''}`}
@@ -631,6 +599,53 @@ const CvCreation: React.FC = () => {
                       </div>
                     ))}
                     {errors.skills && <p className="mt-1 text-sm text-destructive">{errors.skills}</p>}
+                  </div>
+                </div>
+
+                {/* Professional Summary */}
+                <div className="mb-12">
+                  <h3 className="text-xl font-semibold mb-6">Professional Summary</h3>
+                  <div>
+                    <label htmlFor="summary" className="block text-sm font-medium mb-1">Professional Summary</label>
+                    <div className="relative">
+                      <textarea
+                        id="summary"
+                        name="summary"
+                        value={formData.summary}
+                        onChange={handleChange}
+                        className={`form-textarea ${errors.summary ? 'border-destructive' : ''}`}
+                        placeholder="Briefly describe your professional background, skills, and goals..."
+                        rows={4}
+                      />
+                      <button
+                        type="button"
+                        onClick={handleGenerateSummary}
+                        disabled={isSummaryLoading}
+                        className="absolute top-2 right-2 bg-primary/10 hover:bg-primary/20 text-primary p-1.5 rounded-md transition-colors"
+                        title="Generate summary with AI"
+                      >
+                        {isSummaryLoading ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Sparkles className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
+                    {errors.summary && (
+                      <div className="mt-2 px-3 py-2 bg-destructive/10 border-l-4 border-destructive rounded-sm">
+                        <p className="text-sm font-medium text-destructive flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                          </svg>
+                          {errors.summary}
+                        </p>
+                      </div>
+                    )}
+                    <p className="mt-1 text-xs text-foreground/60">
+                      {isSummaryLoading ? 
+                        'Generating your professional summary...' : 
+                        'Click the sparkle icon to generate a summary based on your information'}
+                    </p>
                   </div>
                 </div>
 
