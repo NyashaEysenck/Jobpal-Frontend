@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { ArrowDownIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   const scrollToContent = () => {
@@ -72,13 +72,13 @@ const Hero: React.FC = () => {
               Get Started
             </a>
             
-            <a 
-              href="#how-it-works"
+            <Link 
+              to="/how-it-works"
               className="px-8 py-3 border border-border rounded-md text-base font-medium 
               hover:bg-secondary/80 transition-colors"
             >
               Learn More
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

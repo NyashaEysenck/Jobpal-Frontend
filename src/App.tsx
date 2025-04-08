@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,6 +10,7 @@ import InterviewQuestions from "./pages/InterviewQuestions";
 import CareerGuidance from "./pages/CareerGuidance";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
+import HowItWorks from "./pages/HowItWorks";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +27,7 @@ const App = () => (
             <Route path="/cv" element={<CvCreation />} />
             <Route path="/interview" element={<InterviewQuestions />} />
             <Route path="/career-guidance" element={<CareerGuidance />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

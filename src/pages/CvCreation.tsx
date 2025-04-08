@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Plus, Trash2, Download, Loader2, CheckCircle } from 'lucide-react';
+import { FileText, Plus, Trash2, Download, Loader2, CheckCircle, Sparkles } from 'lucide-react';
 
 interface EducationItem {
   institution: string;
@@ -34,6 +34,7 @@ const CvCreation: React.FC = () => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isSummaryLoading, setIsSummaryLoading] = useState(false);
   const [cvGenerated, setCvGenerated] = useState<CvGenerated | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [activeTab, setActiveTab] = useState<'form' | 'preview'>('form');
@@ -121,7 +122,7 @@ const CvCreation: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}/generate-cv`, {
+      const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL || ''}/generate-cv`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +137,7 @@ const CvCreation: React.FC = () => {
       const data = await response.json();
       setCvGenerated({
         filename: data.filename,
-        downloadUrl: `${import.meta.env.VITE_APP_BASE_URL}${data.downloadUrl}`
+        downloadUrl: `${import.meta.env.VITE_APP_BASE_URL || ''}${data.downloadUrl}`
       });
       setActiveTab('preview');
     } catch (err) {
@@ -149,24 +150,67 @@ const CvCreation: React.FC = () => {
 
   const handleDownload = async () => {
     if (!cvGenerated) return;
+
+    try {
+      window.open(cvGenerated.downloadUrl, '_blank');
+    } catch (error) {
+      console.error('Error downloading CV:', error);
+    }
+  };
+
+  const handleGenerateSummary = async () => {
+    // Check if we have enough data to generate a meaningful summary
+    const hasEducation = formData.education.some(edu => 
+      edu.institution.trim() && edu.degree.trim() && edu.year.trim()
+    );
+    
+    const hasExperience = formData.experience.some(exp => 
+      exp.company.trim() && exp.position.trim() && exp.startDate.trim()
+    );
+    
+    const hasSkills = formData.skills.some(skill => skill.trim());
+    
+    if (!hasEducation && !hasExperience && !hasSkills) {
+      setErrors(prev => ({
+        ...prev,
+        summary: 'Please fill in some education, experience, or skills information first'
+      }));
+      return;
+    }
+    
+    setIsSummaryLoading(true);
+    setErrors(prev => ({ ...prev, summary: '' }));
     
     try {
-      const response = await fetch(cvGenerated.downloadUrl);
+      const response = await fetch(`${import.meta.env.VITE_APP_BASE_URL || ''}/generate-summary`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        mode: 'cors',
+        credentials: 'same-origin'
+      });
+      
+      const data = await response.json();
       
       if (!response.ok) {
-        throw new Error('Failed to download CV.');
+        throw new Error(data.error || 'Failed to generate summary');
       }
-
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `cv_${formData.name.replace(/\s+/g, '_')}.pdf`;
-      a.click();
-      window.URL.revokeObjectURL(url);
+      
+      if (data.success && data.summary) {
+        setFormData(prev => ({ ...prev, summary: data.summary }));
+      } else {
+        throw new Error('No summary was generated');
+      }
     } catch (err) {
-      console.error('Error downloading CV:', err);
-      alert('Failed to download CV. Please try again.');
+      console.error('Error generating summary:', err);
+      setErrors(prev => ({
+        ...prev,
+        summary: err instanceof Error ? err.message : 'Failed to generate summary'
+      }));
+    } finally {
+      setIsSummaryLoading(false);
     }
   };
 
@@ -337,16 +381,36 @@ const CvCreation: React.FC = () => {
                   </div>
                   <div>
                     <label htmlFor="summary" className="block text-sm font-medium mb-1">Professional Summary</label>
-                    <textarea
-                      id="summary"
-                      name="summary"
-                      value={formData.summary}
-                      onChange={handleChange}
-                      className={`form-textarea ${errors.summary ? 'border-destructive' : ''}`}
-                      placeholder="Briefly describe your professional background, skills, and goals..."
-                      rows={4}
-                    />
+                    <div className="relative">
+                      <textarea
+                        id="summary"
+                        name="summary"
+                        value={formData.summary}
+                        onChange={handleChange}
+                        className={`form-textarea ${errors.summary ? 'border-destructive' : ''}`}
+                        placeholder="Briefly describe your professional background, skills, and goals..."
+                        rows={4}
+                      />
+                      <button
+                        type="button"
+                        onClick={handleGenerateSummary}
+                        disabled={isSummaryLoading}
+                        className="absolute top-2 right-2 bg-primary/10 hover:bg-primary/20 text-primary p-1.5 rounded-md transition-colors"
+                        title="Generate summary with AI"
+                      >
+                        {isSummaryLoading ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Sparkles className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
                     {errors.summary && <p className="mt-1 text-sm text-destructive">{errors.summary}</p>}
+                    <p className="mt-1 text-xs text-foreground/60">
+                      {isSummaryLoading ? 
+                        'Generating your professional summary...' : 
+                        'Click the sparkle icon to generate a summary based on your information'}
+                    </p>
                   </div>
                 </div>
 
