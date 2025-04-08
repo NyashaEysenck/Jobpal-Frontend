@@ -235,6 +235,11 @@ const CvCreation: React.FC = () => {
         </div>
 
         <div className="mb-8">
+          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">PROFESSIONAL SUMMARY</h2>
+          <p className="text-foreground whitespace-pre-line">{formData.summary}</p>
+        </div>
+
+        <div className="mb-8">
           <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">EDUCATION</h2>
           {formData.education.map((edu, index) => (
             <div key={index} className="mb-6">
@@ -281,11 +286,6 @@ const CvCreation: React.FC = () => {
               </span>
             ))}
           </div>
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">PROFESSIONAL SUMMARY</h2>
-          <p className="text-foreground whitespace-pre-line">{formData.summary}</p>
         </div>
       </div>
     );
