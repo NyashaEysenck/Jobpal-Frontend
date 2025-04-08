@@ -54,10 +54,17 @@ const CvCreation: React.FC = () => {
       if (!edu.year.trim()) newErrors[`education[${index}].year`] = 'Year is required';
     });
 
+    // Only validate experience fields if there are any experience items with data
     formData.experience.forEach((exp, index) => {
-      if (!exp.company.trim()) newErrors[`experience[${index}].company`] = 'Company is required';
-      if (!exp.position.trim()) newErrors[`experience[${index}].position`] = 'Position is required';
-      if (!exp.startDate.trim()) newErrors[`experience[${index}].startDate`] = 'Start date is required';
+      // Check if this experience entry has any data filled in
+      const hasData = exp.company.trim() || exp.position.trim() || exp.startDate.trim() || exp.endDate.trim() || exp.description.trim();
+      
+      // If any field has data, then validate required fields
+      if (hasData) {
+        if (!exp.company.trim()) newErrors[`experience[${index}].company`] = 'Company is required';
+        if (!exp.position.trim()) newErrors[`experience[${index}].position`] = 'Position is required';
+        if (!exp.startDate.trim()) newErrors[`experience[${index}].startDate`] = 'Start date is required';
+      }
     });
 
     if (formData.skills.some(skill => !skill.trim())) {
@@ -170,10 +177,11 @@ const CvCreation: React.FC = () => {
     
     const hasSkills = formData.skills.some(skill => skill.trim());
     
-    if (!hasEducation && !hasExperience && !hasSkills) {
+    // Only require education OR skills, experience is optional
+    if (!hasEducation && !hasSkills) {
       setErrors(prev => ({
         ...prev,
-        summary: 'Please fill in some education, experience, or skills information first'
+        summary: 'Please fill in some education or skills information first'
       }));
       return;
     }
@@ -242,23 +250,27 @@ const CvCreation: React.FC = () => {
           ))}
         </div>
 
-        <div className="mb-8">
-          <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">WORK EXPERIENCE</h2>
-          {formData.experience.map((exp, index) => (
-            <div key={index} className="mb-6">
-              <div className="flex justify-between">
-                <h3 className="font-bold text-lg">{exp.company}</h3>
-                <span className="text-muted-foreground">
-                  {exp.startDate} - {exp.endDate || 'Present'}
-                </span>
-              </div>
-              <p className="text-foreground italic">{exp.position}</p>
-              {exp.description && (
-                <p className="text-muted-foreground mt-2 whitespace-pre-line">{exp.description}</p>
-              )}
-            </div>
-          ))}
-        </div>
+        {formData.experience.some(exp => exp.company.trim() && exp.position.trim()) && (
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">WORK EXPERIENCE</h2>
+            {formData.experience
+              .filter(exp => exp.company.trim() && exp.position.trim())
+              .map((exp, index) => (
+                <div key={index} className="mb-6">
+                  <div className="flex justify-between">
+                    <h3 className="font-bold text-lg">{exp.company}</h3>
+                    <span className="text-muted-foreground">
+                      {exp.startDate} - {exp.endDate || 'Present'}
+                    </span>
+                  </div>
+                  <p className="text-foreground italic">{exp.position}</p>
+                  {exp.description && (
+                    <p className="text-muted-foreground mt-2 whitespace-pre-line">{exp.description}</p>
+                  )}
+                </div>
+              ))}
+          </div>
+        )}
 
         <div className="mb-8">
           <h2 className="text-xl font-semibold border-b-2 border-primary pb-1 mb-4 text-primary">SKILLS</h2>
