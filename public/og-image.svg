@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#1A1A1A"/>
+  
+  <!-- Background gradient -->
+  <rect width="1200" height="630" fill="url(#bg-gradient)"/>
+  
+  <!-- Background pattern -->
+  <g opacity="0.1">
+    <rect x="100" y="100" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="200" y="200" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="300" y="300" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="400" y="400" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="500" y="500" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="600" y="100" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="700" y="200" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="800" y="300" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="900" y="400" width="50" height="50" rx="8" fill="#FF0000"/>
+    <rect x="1000" y="500" width="50" height="50" rx="8" fill="#FF0000"/>
+  </g>
+  
+  <!-- Logo -->
+  <g transform="translate(250, 240)">
+    <rect width="100" height="100" rx="16" fill="#FF0000"/>
+    <path d="M75 25H25v-4c0-6.6 5.4-12 12-12h26c6.6 0 12 5.4 12 12v4h0v60H25V25h50zM63 13H37c-4.4 0-8 3.6-8 8v4h42v-4c0-4.4-3.6-8-8-8zm12 64H25V33h50v44z" fill="#FAFAFA"/>
+    <path d="M63 53c0 2.2-1.8 4-4 4h-18c-2.2 0-4-1.8-4-4s1.8-4 4-4h18c2.2 0 4 1.8 4 4z" fill="#FAFAFA"/>
+  </g>
+  
+  <!-- Text -->
+  <text x="380" y="290" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="#FAFAFA">JobPal</text>
+  <text x="380" y="350" font-family="Arial, sans-serif" font-size="32" fill="#CCCCCC">Your Career Assistant</text>
+  
+  <!-- Defs -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#121212"/>
+      <stop offset="1" stop-color="#1A1A1A"/>
+    </linearGradient>
+  </defs>
+</svg>
